@@ -19,10 +19,15 @@ set(PROJECT_SOURCES
         mainwindow.ui
 )
 
+if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    enable_language("RC")
+    set (WIN32_RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/App.rc)
+endif()
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(SASS
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        ${WIN32_RESOURCES}
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET SASS APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
